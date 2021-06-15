@@ -34,6 +34,95 @@ print('a부터 b까지 정수의 합을 구합니다.')
 a = int(input('정수 a를 입력하세요.'))
 b = int(input('정수 b를 입력하세요.'))
 
+# 실습 1-11: a부터 b까지 정수의 합 구하기 2
+print('a부터 b까지 정수의 합을 구합니다.')
+a = int(input('정수 a를 입력하세요.'))
+b = int(input('정수 b를 입력하세요.'))
+
+# a, b를 오름차순으로 정렬
+if a > b:
+  a,b = b,a
+sum = 0
+
+for i in range(a, b):
+  print(f'{i} + ', end = "")
+  sum += i
+print(f'{b} = ', end = "")
+sum += b
+
+print(sum)
+
+# 실습 1-12: +와 -를 번갈아 출력하기1
+print('+와 -를 번갈아 출력합니다.')
+n = int(input(' 몇 개를 출력할까요?: '))
+
+for i in range(n):
+  if i% 2:
+    print('-', end ='')
+  else:
+    print('+', end ='')
+
+# 실습 1-13: 실습 1-12의 개선모델
+print('+와 -를 번갈아 출력합니다.')
+n = int(input(' 몇 개를 출력할까요?: '))
+
+for _ in range(n//2): # 무시하고 싶은 값은 언더스코어_로 표시
+  print('+-', end = "")
+if n % 2 == 1:
+  print("+", end = "")
+
+print()
+
+# 실습 1-15: *를 n개 출력하되, w개마다 줄바꿈 하기
+
+print("*를 출력합니다.")
+n = int(input('몇 개를 출력할까요?: '))
+w = int(input('몇 개마다 줄바꿈할까요?'))
+
+for _ in range(n//w):
+  print('*' * w)
+
+rest = n % w
+if rest:
+  print('*'* rest)
+
+# 실습 1-16: 1부터 n까지 정수의 합 구하기(n값은 양수만 입력받음.)
+
+print('1부터 n까지 정수의 합을 구합니다.')
+
+while True:
+  n = int(input('n값을 입력하세요: '))
+
+  if n > 0:
+    break
+
+sum = n * (n + 1) / 2
+print(f'1부터 {n}까지의 합은 {sum}입니다.')
+
+# 실습 1-17: 가로, 세로 길이가 정수이고 넓이가 area인 직사각형에서 변의 길이 나열하기
+
+area = int(input('직사각형의 넓이를 입력하세요: '))
+
+for i in range(1, area + 1):
+  if i * i > area: break
+  if area % i: continue
+  print(f'{i} * {area // i}')
+# 실습 1-18: 10~99 사이의 난수 n개 형성하기(13이 나오면 중단)
+import random
+n = int(input('난수의 개수를 입력하세요.: '))
+
+for _ in range(n):
+  r = random.randint(10, 99)
+  print(r, end=' ')
+  if r == 13:
+    break
+
+else:
+  print("\n난수 생성을 종료합니다.")
+# 실습 1-20: 1부터 12까지 8을 건너뛰고 출력하기 2
+for i in list(range(1, 8)) + list(range(9, 13)):
+  print(i, end = " ")
+
 # a, b를 오름차순으로 정렬
 if a > b:
   a,b = b,a
