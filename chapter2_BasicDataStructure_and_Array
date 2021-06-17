@@ -35,3 +35,130 @@ for i in range(num):
 
 print(f'{x}')
 print(f'이 가운데 최댓값은 {max_of(x)}입니다.')
+
+# 실습 2C-2: 리스트의 모든 원소를 enumerate() 함수로 스캔학
+x = ['철수', '영진', '해균', '태원']
+for i, name in enumerate(x, 1): # 인수 1을 넣어주면 1부터 count
+  print(f'x[{i}] = {name}')
+  
+# 실습 2-6: 뮤터블 시퀀스 원소를 역순으로 정렬
+from typing import Any, MutableSequence
+
+def reverse_array(a: MutableSequence) -> None:
+  n = len(a)
+  for i in range(n//2):
+    a[i], a[n-i-1] = a[n-i-1], a[i]
+
+if __name__ == '__main__':
+  print("배열 원소를 역순으로 정렬합니다.")
+  nx = int(input('원소 수를 입력하세요.: '))
+  x = [None] * nx # 원소 수가 nx인 리스트 형성
+
+  for i in range(nx):
+    x[i] = int(input(f'x[{i}]값을 입력하세요.: '))
+  
+  reverse_array(x) # 위에서 정의한 함수를 이용해서 역순으로 정렬
+  
+  print('배열 원소를 역순으로 정렬했습니다.')
+  for i in range(len(x)):
+    print(f'x[{i}] = {x[i]}')
+ # 실습 2-7[A]: 10진수 정숫값을 입력받아 2~36진수로 변환하여 출력하기
+
+def card_conv(x: int, r: int) -> str:
+
+  d = '' # 변환 후의 문자열
+  dchar = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+  while x > 0:
+    d += dchar[x % r] # 나머지를 넣으면 됨!
+    x //= r # 몫을 계속 남겨서 나눠가기!
+
+  return d[::-1]
+
+if __name__ == '__main__':
+  print('10진수를 n진수로 변환합니다.')
+
+  while True:
+    while True: # 음이 아닌 정수를 입력 박음
+      no = int(input('변환할 값으로 음이 아닌 정수를 입력하세요.: '))
+      if no > 0:
+        break
+    
+    while True: # 2~36진수의 진수값을 입력받음
+      cd = int(input('어떤 진수로 변환할까요?.: '))
+      if 2 <= cd <= 36:
+        break
+    print (f'{cd}진수로는 {card_conv(no, cd)}입니다.')
+
+    retry = input("한번 더 변환할까요? (Y ... 예 / N ... 아니오): ")
+    if retry in {'N', 'n'}:
+      break
+  
+# 실습 2-8: 1000 이하의 소수를 나열하기
+counter = 0 # 나눗셈 횟수를 카운트
+
+for n in range(2, 1001):
+  for i in range(2, n):
+    counter += 1
+    if n % i == 0:
+      break
+  else:
+      print(n)
+
+print(f'나눗셈을 실행한 횟수: {counter}')
+# 1000이하의 소수를 나열하기(알고리즘 개선1)
+
+counter = 0
+ptr = 0 # 이미 찾은 소수의 개수
+prime = [None] * 500 # 소수들을 저장하는 배열
+
+prime[ptr] = 2 # 2는 소수에 해당하므로 초깃값으로 설정
+ptr += 1
+
+for n in range(3, 1001, 2): #홀수만을 대상으로 설정
+  for i in range(1, ptr):
+    counter += 1
+    if n % prime[i] == 0:
+      break
+  else:
+      prime[ptr] = n
+      ptr += 1
+for i in range(ptr):
+  print(prime[i])
+print(f'나눗셈을 실행한 횟수: {counter}')
+
+# 실습2-10: 1000이하의 소수를 나열하기(알고리즘 개선2)
+
+counter = 0
+ptr = 0
+prime = [None] * 500
+
+prime[ptr] = 2
+ptr += 1
+prime[ptr] = 3
+ptr += 1
+
+for n in range(5, 1001, 2):
+  i = 1
+  while prime[i] * prime[i] <= n:
+    counter += 2
+    if n% prime[i] == 0:
+      break
+    i += 1
+
+  else:
+    prime[ptr] = n
+    ptr += 1
+    counter += 1
+
+for i in range(ptr):
+  print(prime[i])
+print(f'곱셈과 나눗셈을 실행한 횟수: {counter}')
+
+# 깊은 복사로 이전에 복사해온 원래 리스트의 원소를 수정하더라도 변함없게 하기
+import copy
+x = [[1,2,3], [4, 5, 6]]
+y = copy.deepcopy(x)
+x[0][1] = 9
+print(x)
+print(y)
