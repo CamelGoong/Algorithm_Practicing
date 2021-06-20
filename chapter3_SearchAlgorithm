@@ -1,0 +1,97 @@
+# 실습 3-1: 선형 검색 구현
+from typing import Sequence ,Any
+
+def seq_search(a: Sequence, key: Any) -> int:
+  i = 0
+
+  while True:
+    if i == len(a):
+      return -1
+    if a[i] == key:
+      return i # 검색에 성공한 현재 인덱스를 반환
+    i += 1
+
+# 이하 코드부터가 실행코드
+if __name__ == '__main__':
+  num = int(input('원소 수를 입력하세요.: '))
+  x = [None] * num # 입력된 원소 수 만큼의 배열을 생성
+
+  for i in range(num):
+    x[i] = int(input(f'x[{i}]: ')) # x의 각 원소들을 순서대로 입력
+  
+  ky = int(input('검색할 값을 입력하세요.: '))
+
+  idx = seq_search(x, ky)
+
+  if idx == -1:
+    print('검색값을 갖는 원소가 존재하지 않습니다.')
+  else:
+    print(f'검색값은 x[{idx}]에 있습니다.')
+# 실습 3-3: 선형 검색 알고리즘을 보초법으로 수정
+import copy
+from typing import Sequence, Any
+def seq_search(seq: Sequence, key: Any) -> int:
+  a = copy.deepcopy(seq)
+  a.append(key) # seq를 복사
+
+  i = 0
+  while True:
+    if a[i] == key:
+      break
+    i += 1
+
+  return -1 if i == len(seq) else i
+  
+if __name__ == '__main__':
+  num = int(input('원소 수를 입력하세요.: '))
+  x = [None] * num # 입력된 원소 수 만큼의 배열을 생성
+
+  for i in range(num):
+    x[i] = int(input(f'x[{i}]: ')) # x의 각 원소들을 순서대로 입력
+  
+  ky = int(input('검색할 값을 입력하세요.: '))
+
+  idx = seq_search(x, ky)
+
+  if idx == -1:
+    print('검색값을 갖는 원소가 존재하지 않습니다.')
+  else:
+    print(f'검색값은 x[{idx}]에 있습니다.')
+# 실습3-4: 이진 검색 알고리즘
+from typing import Any, Sequence
+def bin_search(a: Sequence, key: Any) -> int:
+  pl = 0
+  pr = len(a) - 1
+
+  while True:
+    pc = (pl + pr) // 2
+    if a[pc] == key:
+      return pc
+    elif a[pc] < key:
+      pc = pc + 1
+    else:
+      pr = pc -1
+    if pl > pr:
+      break
+      return -1
+
+if __name__ == "__main__":
+  num = int(input('원소 수를 입력하세요.: '))
+  x = [None] * num
+
+  print('배열 데이터를 오름차순으로 입력하세요.')
+
+  x[0] = int(input('x[0]: '))
+
+  for i in range(1, num):
+    while True:
+      x[i] = int(input(f'x[{i}]: '))
+      if x[i] >= x[i-1]:
+        break
+  ky = int(input('검색할 값을 입력하세요.: '))
+  idx = bin_search(x, ky)
+
+  if idx == -1:
+    print('검색값을 갖는 원소가 존재하지 않습니다.')
+  else:
+    print(f'검색값은 x[{idx}]에 있습니다.')
