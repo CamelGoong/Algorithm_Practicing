@@ -1,0 +1,146 @@
+# 실습 6-1: 버블 정렬 알고리즘 구현하기
+
+from typing import MutableSequence
+
+def bubble_sort(a: MutableSequence) -> None:
+  n = len(a)
+  for i in range(n - 1):
+    for j in range(n - 1, i, -1):
+      if a[j - 1] > a[j]:
+        a[j - 1], a[j] = a[j], a[j - 1]
+
+# 이하 실행 창
+
+if __name__ == '__main__':
+  print('버블 정렬을 수행합니다.')
+  num = int(input('원소 수를 입력하세요.: '))
+  x = [None] * num
+
+  for i in range(num):
+    x[i] = int(input(f'x[{i}]: '))
+  
+  bubble_sort(x)
+
+  print('오름차순으로 정렬했습니다.')
+  for i in range(num):
+    print(f'x[{i}] = {x[i]}')
+# 실습 6-3: 버블 정렬 알고리즘 구현하기 (알고리즘의 개선 1)
+
+from typing import MutableSequence
+
+def bubble_sort(a: MutableSequence) -> None:
+  n = len(a)
+  for i in range(n - 1):
+    exchange = 0 # 각 패스에서의 교환횟수
+    for j in range(n - 1, i, -1):
+      if a[j - 1] > a[j]:
+        a[j - 1], a[j] = a[j], a[j - 1]
+        exchange += 1
+    if exchange == 0:
+      break
+
+
+# 이하 실행 창
+
+if __name__ == '__main__':
+  print('버블 정렬을 수행합니다.')
+  num = int(input('원소 수를 입력하세요.: '))
+  x = [None] * num
+
+  for i in range(num):
+    x[i] = int(input(f'x[{i}]: '))
+  
+  bubble_sort(x)
+
+  print('오름차순으로 정렬했습니다.')
+  for i in range(num):
+    print(f'x[{i}] = {x[i]}')
+# 실습 6-4: 버블 정렬 알고리즘 구현하기 (알고리즘의 개선 2)
+
+from typing import MutableSequence
+
+def bubble_sort(a: MutableSequence) -> None:
+  n = len(a)
+  k = 0
+  while k < n - 1:
+    last = n - 1
+    for j in range(n - 1, k, -1):
+      if a[j - 1] > a[j]:
+        a[j - 1], a[j] = a[j], a[j - 1]
+        last = j
+    k = last
+
+# 이하 실행 창
+
+if __name__ == '__main__':
+  print('버블 정렬을 수행합니다.')
+  num = int(input('원소 수를 입력하세요.: '))
+  x = [None] * num
+
+  for i in range(num):
+    x[i] = int(input(f'x[{i}]: '))
+  
+  bubble_sort(x)
+
+  print('오름차순으로 정렬했습니다.')
+  for i in range(num):
+    print(f'x[{i}] = {x[i]}')
+# 실습 6-5: 셰이커 정렬 알고리즘 구현하기
+from typing import MutableSequence
+def shaker_sort(a: MutableSequence) -> None:
+  left = 0
+  right = len(a) -1 
+  while left < right:
+    for j in range(right, left - 1):
+      for j in range(right, left, -1):
+        if a[j - 1] > a[j]:
+          a[j - 1], a[j] = a[j], a[j - 1]
+          last = j
+      left = last
+
+    for j in range(left, right):
+      if a[j] > a[j + 1]:
+        a[j], a[j + 1] = a[j + 1], a[j]
+        last = j
+    right = last
+# 실습 6-6: 단순 선택 정렬 알고리즘 구현하기
+from typing import MutableSequence
+def selection_sort(a: MutableSequence) -> None:
+  n  = len(a)
+  for i in range(n-1):
+    min = i
+    for j in range(i + 1, n):
+      if a[j] < a[min]:
+        min = j
+    a[i], a[min] = a[min], a[i]
+# 실습 6-7: 단순 삽입 정렬 알고리즘 구현하기
+from typing import MutableSequence
+def insertion_sort(a: MutableSequence) -> None:
+  n = len(a)
+  for i in range(1, n):
+    j = i
+    tmp = a[i]
+    while j > 0 and a[j - 1] > tmp:
+      a[j] = a[j - 1]
+      j -= 1
+    a[j] = tmp
+
+if __name__ == '__main__':
+  print('단순 삽입 정렬을 수행합니다.')
+  num = int(input('원소 수를 입력하세요.: '))
+  x = [None] * num
+
+  for i in range(num):
+    x[i] = int(input(f'x[{i}]: '))
+  insertion_sort(x)
+
+  print('오름차순으로 정렬했습니다.')
+  for i in range(num):
+    print(f'x[{i}] = {x[i]}')
+# 실습 6C-2: 이진 삽입 정렬 알고리즘 구현
+from typing import MutableSequence
+import bisect
+
+def binary_insertion_sort(a: MutableSequence) -> None:
+  for i in range(1, len(a)):
+    bisect.insort(a, apop(i), 0 , i)
